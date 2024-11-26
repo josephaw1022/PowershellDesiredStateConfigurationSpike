@@ -1,6 +1,8 @@
 # Set Execution Policy to RemoteSigned to allow script execution globally
 Write-Host "Setting Execution Policy to RemoteSigned..."
 Set-ExecutionPolicy RemoteSigned -Scope LocalMachine -Force
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+
 
 # Ensure the script runs in the correct directory
 Write-Host "Setting script directory to current location..."
