@@ -22,7 +22,6 @@ Configuration DevEnvironment
             "azure-cli",
             "cilium-cli",
             "docker-desktop",
-            "git",
             "golang",
             "go-task",
             "graalvm",
