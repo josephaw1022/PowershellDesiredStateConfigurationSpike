@@ -11,7 +11,20 @@ if (-not (Get-Module -ListAvailable -Name cChoco)) {
     Write-Host "cChoco module is already installed."
 }
 
-# Step 2: Run LCMConfig.ps1 to configure the Local Configuration Manager (LCM)
+# Step 2: Ensure WinRM is Configured for DSC
+Write-Host "Ensuring WinRM is configured for DSC..."
+# Enable PowerShell remoting (required for DSC to work)
+if (-not (Get-Service -Name winrm -ErrorAction SilentlyContinue)) {
+    Write-Host "WinRM service is not found, configuring WinRM..."
+    # Run quickconfig to enable and configure WinRM
+    winrm quickconfig -q
+    # Enable PS Remoting
+    Enable-PSRemoting -Force
+} else {
+    Write-Host "WinRM is already configured."
+}
+
+# Step 3: Run LCMConfig.ps1 to configure the Local Configuration Manager (LCM)
 Write-Host "Running LCMConfig.ps1 to configure LCM..."
 if (Test-Path ".\LCMConfig.ps1") {
     .\LCMConfig.ps1
@@ -26,8 +39,7 @@ if (Test-Path ".\LCMConfig.ps1") {
     Write-Host "LCMConfig.ps1 not found. Please ensure the file exists in the current directory." -ForegroundColor Red
 }
 
-
-# Step 3: Run DevEnvironment.ps1 to install development environment tools
+# Step 4: Run DevEnvironment.ps1 to install development environment tools
 Write-Host "Running DevEnvironment.ps1 to install development environment tools..."
 
 if (Test-Path ".\DevEnvironment.ps1") {
@@ -42,8 +54,6 @@ if (Test-Path ".\DevEnvironment.ps1") {
 } else {
     Write-Host "DevEnvironment.ps1 not found. Please ensure the file exists in the current directory." -ForegroundColor Red
 }
-
-
 
 Write-Host "DSC configuration completed successfully." -ForegroundColor Green
 exit 0
