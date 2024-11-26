@@ -1,8 +1,15 @@
-# Set Execution Policy to RemoteSigned to allow script execution globally
-Write-Host "Setting Execution Policy to RemoteSigned..."
-Set-ExecutionPolicy Bypass -Scope LocalMachine -Force
-Set-ExecutionPolicy Bypass -Scope CurrentUser -Force
+# Check if the script is running with administrator rights
+Function Test-ProcessAdminRights {
+    $adminCheck = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+    return $adminCheck.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+}
 
+# Ensure the script runs with admin rights
+If (-not (Test-ProcessAdminRights)) {
+    Write-Host "Script is not running with administrator rights. Restarting with elevated privileges..."
+    Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -File $PSCommandPath" -Verb RunAs
+    Exit
+}
 
 # Ensure the script runs in the correct directory
 Write-Host "Setting script directory to current location..."
@@ -21,7 +28,6 @@ if (-not (Get-Module -ListAvailable -Name cChoco)) {
 Write-Host "Ensuring WinRM is configured for DSC..."
 # Enable WinRM service (needed for DSC to work)
 winrm quickconfig -q
-
 
 # Step 3: Run LCMConfig.ps1 to configure the Local Configuration Manager (LCM)
 Write-Host "Running LCMConfig.ps1 to configure LCM..."
