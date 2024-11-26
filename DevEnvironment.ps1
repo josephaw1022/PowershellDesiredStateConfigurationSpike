@@ -16,33 +16,7 @@ Configuration DevEnvironment
         
         # Chocolatey Package List
         $packages = @(
-            "7zip",
-            "ansiblevaultcmd",
-            "autohotkey",
-            "azure-cli",
-            "cilium-cli",
-            "docker-desktop",
-            "golang",
-            "go-task",
-            "graalvm",
-            "jq",
-            "k3d",
-            "k9s",
-            "kind",
-            "kubectx",
-            "kubens",
-            "kubernetes-cli",
-            "headlamp",
-            "kubernetes-helm",
-            "make",
-            "nmap",
-            "nvm",
-            "openjdk",
-            "openssl",
-            "pgadmin4",
-            "podman-desktop",
-            "python312",
-            "vim"
+            "headlamp"
         )
 
         # Install Each Package
