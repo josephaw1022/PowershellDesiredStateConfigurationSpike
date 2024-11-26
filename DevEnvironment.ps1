@@ -3,7 +3,7 @@
 Configuration DevEnvironment
 {
 
-    Import-DscResource -ModuleName @{ModuleName = "cChoco"; }
+    Import-DscResource -Module cChoco
 
     Node localhost
     {
