@@ -43,8 +43,6 @@ Configuration DevEnvironment
             "pgadmin4",
             "podman-desktop",
             "python312",
-            "tektoncd-cli",
-            "terraform",
             "vim"
         )
 
