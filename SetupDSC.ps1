@@ -11,6 +11,10 @@ If (-not (Test-ProcessAdminRights)) {
     Exit
 }
 
+# Set Execution Policy to Bypass for the current session (only applies to this session)
+Write-Host "Setting Execution Policy to Bypass for the current session..."
+Set-ExecutionPolicy Bypass -Scope Process -Force
+
 # Ensure the script runs in the correct directory
 Write-Host "Setting script directory to current location..."
 Set-Location -Path "$PSScriptRoot"
