@@ -42,8 +42,6 @@ Configuration DevEnvironment
             "openssl",
             "pgadmin4",
             "podman-desktop",
-            "python",
-            "python3",
             "python312",
             "tektoncd-cli",
             "terraform",
