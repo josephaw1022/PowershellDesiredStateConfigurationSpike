@@ -43,7 +43,7 @@ if (Test-Path ".\DevEnvironment.ps1") {
     .\DevEnvironment.ps1
     if (Test-Path "C:\DSCConfigurations\localhost.mof") {
         Write-Host "Applying DevEnvironment configuration..."
-        Start-DscConfiguration -Path "C:\DSCConfigurations" -Wait -Verbose
+        Start-DscConfiguration -Path "C:\DSCConfigurations" -Wait -Verbose -Force
     } else {
         Write-Host "DevEnvironment configuration not generated. Ensure DevEnvironment.ps1 created the MOF file." -ForegroundColor Red
         exit 1
