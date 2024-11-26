@@ -47,16 +47,15 @@ Configuration DevEnvironment
             "python312",
             "tektoncd-cli",
             "terraform",
-            "vim",
-            "vscode"
+            "vim"
         )
 
         # Install Each Package
         foreach ($package in $packages) {
             cChocoPackageInstaller $($package.Replace(".", "_")) {
-                Name   = $package
-                Ensure = "Present"
-                Source = "https://community.chocolatey.org/api/v2/"
+                Name      = $package
+                Ensure    = "Present"
+                Source    = "https://community.chocolatey.org/api/v2/"
                 DependsOn = "[cChocoInstaller]InstallChoco"
             }
         }
