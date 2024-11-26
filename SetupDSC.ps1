@@ -2,6 +2,10 @@
 Write-Host "Setting Execution Policy to RemoteSigned..."
 Set-ExecutionPolicy RemoteSigned -Scope Process -Force
 
+# Set Execution Policy to RemoteSigned to allow script execution globally
+Write-Host "Setting Execution Policy to RemoteSigned..."
+Set-ExecutionPolicy RemoteSigned -Scope LocalMachine -Force
+
 # Ensure the script runs in the correct directory
 Write-Host "Setting script directory to current location..."
 Set-Location -Path "$PSScriptRoot"
