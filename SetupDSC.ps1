@@ -11,18 +11,11 @@ if (-not (Get-Module -ListAvailable -Name cChoco)) {
     Write-Host "cChoco module is already installed."
 }
 
-# Step 2: Ensure WinRM is Configured for DSC
+# Step 2: Ensure WinRM is Configured for DSC (Simplified)
 Write-Host "Ensuring WinRM is configured for DSC..."
-# Enable PowerShell remoting (required for DSC to work)
-if (-not (Get-Service -Name winrm -ErrorAction SilentlyContinue)) {
-    Write-Host "WinRM service is not found, configuring WinRM..."
-    # Run quickconfig to enable and configure WinRM
-    winrm quickconfig -q
-    # Enable PS Remoting
-    Enable-PSRemoting -Force
-} else {
-    Write-Host "WinRM is already configured."
-}
+# Enable WinRM service (needed for DSC to work)
+winrm quickconfig -q
+
 
 # Step 3: Run LCMConfig.ps1 to configure the Local Configuration Manager (LCM)
 Write-Host "Running LCMConfig.ps1 to configure LCM..."
